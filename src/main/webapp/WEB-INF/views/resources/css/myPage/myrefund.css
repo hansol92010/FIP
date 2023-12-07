@@ -1,0 +1,73 @@
+main{
+    width: 100%;
+    overflow: hidden;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+
+.my_page h1{
+    text-align: center;
+}
+
+.my_page{
+    margin-top: 100px;
+    width: 60%;
+    margin: auto;
+    padding-bottom: 30px;
+    background-color: ghostwhite;
+    border: 2px solid black;
+    border-radius: 5%;
+}
+.my_buy{
+    padding: 30px;
+}
+.orderTbl{
+    width: 90%;
+    margin: auto;  
+    border: 1px solid rgb(0, 0, 0);
+    background-color: white;
+    margin-top: 3%;
+}
+
+.orderTbl span{
+    text-align: center;
+}
+
+.thead{
+    background-color: slateblue;
+    color: white;
+    height: 30px;
+    text-align: center;
+}
+#productName{
+    font-weight: bold;
+}
+
+#productName:hover{
+    color: darkviolet;
+}
+
+
+#buy_img{
+    margin-left: 20px;
+    width: 150px;
+    height: 150px;
+    float: left;
+    border: 1px solid gray;
+    margin-right: 40px;
+}
+
+
+td{
+    text-align: center;
+}
+
+#order_list{
+    text-align: left;
+}

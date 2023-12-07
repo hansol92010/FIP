@@ -1,0 +1,36 @@
+main{
+    width: 100%;
+}
+
+.out_page{
+    background-color: white;
+    height: 400px;
+    margin: auto;
+    width: 50%;
+    padding: 3%;
+        border: 0;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    margin-top: 2%;
+    margin-bottom: 200px;
+}
+
+.out_page div{
+    height: 70%;
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid black;
+}
+.out_page h1{
+    font-size: 25px;
+}
+
+.out_page p{
+    font-size: 20px;
+}
+
+.out_page button{
+    border: 0;
+}

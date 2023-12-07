@@ -1,0 +1,149 @@
+@charset "UTF-8";
+
+body{
+	font-family:'Do Hyeon';
+}
+
+
+/*스타일 헤더 (브랜드 옵션 nav)*/
+nav .style_nav {
+  height: 70px;
+  line-height: 50px;
+  text-align: center;
+  background-color: black;
+  display: flex;
+}
+/*스타일 헤더(브랜드 항목)*/
+nav .style_brand {
+	margin: auto;
+	
+}
+/*스타일 헤더(각 브랜드 클래스)*/
+.category_Menu {
+	margin-left: 15px;
+	text-decoration-line: none;
+  	color: white;
+  	font-size: 20px;
+}
+/*스타일 헤더(각 브랜드 클래스) 호버*/
+.category_Menu:hover{
+	font-weight: bold;
+	color:pink;
+}
+
+/*스타일 헤더(조회순,좋아요순 옵션 )*/
+.style_option_sort {
+	margin: 20px;
+	text-align: center;
+}
+/*스타일 헤더(조회순)*/
+.style_option_1 {
+	text-decoration-line: none;
+  	color: black;
+}
+/*스타일 헤더(조회순) 호버*/
+.style_option_1:hover{
+	color: hotpink;
+	font-size: 15px;
+}
+/*스타일 헤더(좋아요순)*/
+.style_option_2 {
+	text-decoration-line: none;
+  	color: black;
+}
+/*스타일 헤더(좋아요순) 호버*/
+.style_option_2:hover{
+	color: mediumpurple;
+	font-size: 15px;
+}
+/*글쓰기 버튼 div*/
+.btnWrite{
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1vh;
+}
+
+/*스타일 게시물 글쓰기 버튼(btnWrite)*/
+.style_btn_Write {
+	background-color: black;
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    font-family: 'Do Hyeon';
+    width: 8vw;
+    height: 5vh;
+}
+
+/* 스타일 메인 div */
+.style_main{
+	width:80%;
+	margin:auto;
+	display: flex;	
+  justify-content: center;
+      flex-wrap: wrap;
+      min-height: 60vh;
+
+}
+
+/*스타일 메인 사진 */
+.style_list_main_img img{
+  width: 300px;
+  height: 420px;
+  margin: 25px;
+  border-radius: 50px;
+}
+/*스타일 메인사진 */
+.style_info_div{
+      width: 100%;
+    display: flex;
+    margin-bottom: 3vh;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+.info_img{
+  width: 50px;
+  height: 50px;
+  
+}
+
+.info_img img{
+  width: 100%;
+  height: 100%;
+  border-radius:50%;
+  border: 1px solid; 
+  
+}
+.info_name p, .info_like p{
+margin-left: 1vw;
+  color: black;
+  font-weight: bold;
+  margin-bottom: 
+}
+
+.info_like{
+  display: flex;
+  padding-right: 0;
+}
+
+.info_like img{
+  width: 30px;
+  height: 30px;
+  margin-left: 15px;
+}
+
+.style_List_img{
+  border: 1px solid;
+  padding: 0px;
+  background-color: white;
+  margin: 3px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+

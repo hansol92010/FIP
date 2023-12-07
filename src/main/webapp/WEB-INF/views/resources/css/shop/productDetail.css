@@ -1,0 +1,65 @@
+main{
+  background-color: ghostwhite;
+  width: 100%;
+}
+.shop_div{
+  width: 90%;
+}
+
+/*버튼*/
+.btn{
+  border: none;
+  color: black;
+  padding: 5px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 5px;}
+
+/*상품사진*/
+img{
+ width: 700px;
+ margin: 7px 400px 0 0;
+}
+
+li{
+
+  list-style: none;
+}
+
+/*샵 상세페이지 가로배열*/
+.container
+{
+  display: flex;
+  height: 100%;
+}
+/*상품사진*/
+.detail_img{
+  flex: 5;
+  margin-left: 6%;
+}
+/*상품옵션*/
+.detail{
+ flex: 5;
+ left: 70%;
+ position: fixed;
+}
+
+/******찜하기******/
+/*찜하기 하트 이미지*/
+.top_info{
+  	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 150%;
+}
+
+.top_info img {
+	width: 30px;
+	height: 30px;
+}
+.btn_like_after{
+	background-color: rgba(0,0,0,0);
+	border: none;
+}
+

@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+
+.style_view_img img {
+	height: 900px;
+  margin: center;
+  margin-top: 20px;
+  width: 800px;
+}
+
+/******게시물 내용******/
+
+.row_div{
+	display: flex;
+	    justify-content: center;
+}
+
+
+
+
+.title {
+	font-size: 20px;
+	font-weight: bold;
+	width: 100%;
+	margin-top: 1vh;
+}
+.content{
+	font-size: 15px;
+	width: 100%;
+	height: 10vw;
+	margin-top: 3vh;
+}
+/*전체 움직이기*/
+.container
+{
+	margin-left: 13px;
+}
+
+/*프로필 설정*/
+.style_profile {
+	display: flex;
+	height: 50px;
+}
+
+/*프로필 사진 설정*/
+.profile_img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  overflow: hidden;
+  margin-left: 0px;
+}
+
+/*프로필 사진*/
+.profile_img img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	float: left;
+	margin-top: 0px;
+}
+
+/*프로필 닉네임 */
+.userNickName {
+	margin: 5px 0px 0px 5px;
+	font-size:30px;
+	
+}
+
+/*프로필 전체*/
+.style_view
+{
+	
+}
+
+.style_view_div{
+	display:flex;
+	padding: 1vh;
+	padding-left: 3vh;
+}
+
+
+
+/*메인 화면 div*/
+.style_view_main{
+	margin-left: 300px;
+}
+
+/*브랜드 고르기*/
+.brandCheck
+{
+	text-align: center;
+	font-size:20px;
+}
+
+
+/*상품고르기 글씨*/
+.proImgView-container
+{
+	margin-left: 25px;
+	font-size:20px;
+}
+
+/*스타일 미리보기 */
+.image_container{
+	display: flex;
+    justify-content: center;
+}
+
+
+.image_container img
+{
+	width: 20vw;
+	height: 25vw;
+	
+}
+/*제목 내용*/
+.writeReal
+{
+	width: 95%;
+	margin: auto;
+}
+
+
+/*파일 첨부 글씨*/
+.fileReal
+{
+    width: 95%;
+    margin: auto;
+}
+
+/*글쓰기 취소 버튼*/
+.col-sm-12
+{
+	
+}
+
+.col-sm-12 button{
+	border-radius: 8px;
+	border: 1px solid black;
+	font-weight: bold;	
+}
+
+.click_img_label{
+	display:flex;
+	width: 148px;
+	height: 38px;
+	padding: 9px;
+	background-color: black;
+	color:white;
+	justify-content: center;
+	border-radius: 8px; 
+	font-weight: 400;
+}
+
+
+.click_img_label input{
+	display: none;
+}

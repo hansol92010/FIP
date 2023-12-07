@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.web.dao.OrderDao">
+ 
+<resultMap type="com.icia.web.model.Order" id="orderResultMap">
+	<id column="ORDER_NO" property="orderNo"/>
+	<result column="USER_ID" property="userId"/>
+	<result column="TOTAL_ORDER_PRICE" property="totalOrderPrice"/>
+	<result column="ORDER_DATE" property="orderDate"/>
+	<result column="SHOPPING_ADDRESS" property="shoppingAddress"/>
+</resultMap>
+ 
+ <resultMap type="com.icia.web.model.OrderDetail" id="orderDetailResultMap">
+ 	<id column="ORDER_DETAIL_NO" property="orderDetailNo"/>
+ 	<result column="ORDER_NO" property="orderNo"/>
+ 	<result column="PRODUCT_NO" property="productNo"/>
+ 	<result column="PRODUCT_NAME" property="productName"/>
+ 	<result column="ORDER_COUNT" property="orderCount"/>
+ 	<result column="PRODUCT_PRICE" property="productPrice"/>
+ 	<result column="SIZE_NAME" property="sizeName"/>
+ 	<result column="DISCOUNT_PRICE" property="discountPrice"/>
+ 	<result column="TOTAL_PRICE" property="totalPrice"/>
+ </resultMap>
+ 
+<select id="myOrderListSelect" parameterType="com.icia.web.model.Order" resultMap="orderResultMap">
+	SELECT ORDER_NO,
+	       USER_ID,
+	       TOTAL_ORDER_PRICE,
+	       ORDER_DATE,
+	       SHOPPING_ADDRESS
+	  FROM (SELECT ROWNUM AS RNUM,
+	               ORDER_NO,
+	               USER_ID,
+	               TOTAL_ORDER_PRICE,
+	               ORDER_DATE,
+	               SHOPPING_ADDRESS
+	          FROM (SELECT ORDER_NO,
+	                       NVL(USER_ID, '') AS USER_ID,
+	                       NVL(TOTAL_ORDER_PRICE, 0) AS TOTAL_ORDER_PRICE,
+	                       NVL(TO_CHAR(ORDER_DATE, 'YYYY-MM-DD'), '') AS ORDER_DATE,
+	                       NVL(SHOPPING_ADDRESS, '') AS SHOPPING_ADDRESS
+	                  FROM TBL_ORDER
+	                 WHERE USER_ID = #{userId}
+	                 ORDER BY ORDER_NO DESC))
+	 WHERE RNUM <![CDATA[>=]]> #{startRow}
+	   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+<select id="myOrderListCount" parameterType="String" resultType="int">
+	SELECT COUNT(ORDER_NO)
+	  FROM TBL_ORDER
+	 WHERE USER_ID = #{value}
+</select>
+
+<select id="myOrderDetailList" parameterType="int" resultMap="orderDetailResultMap">
+	SELECT ORDER_DETAIL_NO,
+	       NVL(ORDER_NO, 0) AS ORDER_NO,
+	       NVL(PRODUCT_NO, 0) AS PRODUCT_NO,
+	       NVL(PRODUCT_NAME, '') AS PRODUCT_NAME,
+	       NVL(ORDER_COUNT, 0) AS ORDER_COUNT,
+	       NVL(PRODUCT_PRICE, 0) AS PRODUCT_PRICE,
+	       NVL(SIZE_NAME, '') AS SIZE_NAME,
+	       NVL(DISCOUNT_PRICE, 0) AS DISCOUNT_PRICE,
+	       NVL(TOTAL_PRICE, 0) AS TOTAL_PRICE
+	  FROM TBL_ORDER_DETAIL
+	 WHERE ORDER_NO = #{value}
+</select>
+
+<select id="myOrderSelect" parameterType="int" resultMap="orderResultMap">
+	SELECT ORDER_NO,
+	       NVL(USER_ID, '') AS USER_ID,
+	       NVL(TOTAL_ORDER_PRICE, 0) AS TOTAL_ORDER_PRICE,
+	       NVL(TO_CHAR(ORDER_DATE, 'YYYY-MM-DD'), '') AS ORDER_DATE,
+	       NVL(SHOPPING_ADDRESS, '') AS SHOPPING_ADDRESS
+	  FROM TBL_ORDER
+	 WHERE ORDER_NO = #{value}
+</select>
+
+<select id="tblOrderSeqSelect" resultType="int">
+	SELECT TEST_TBL_ORDER_SEQ.NEXTVAL
+  	  FROM DUAL
+</select>
+
+<insert id="orderInsert" parameterType="com.icia.web.model.Order">
+	INSERT INTO TBL_ORDER (
+    ORDER_NO,
+    USER_ID,
+    TOTAL_ORDER_PRICE,
+    ORDER_DATE,
+    SHOPPING_ADDRESS
+) VALUES (
+    #{orderNo},
+    #{userId},
+    #{totalOrderPrice},
+    SYSDATE,
+    #{shoppingAddress}
+)
+</insert>
+
+<insert id="orderDetailInsert" parameterType="com.icia.web.model.OrderDetail">
+	<selectKey resultType="int" keyProperty="orderDetailNo" order="BEFORE">
+		SELECT TEST_TBL_ORDER_DETAIL_SEQ.NEXTVAL
+  		  FROM DUAL
+	</selectKey>
+	INSERT INTO TBL_ORDER_DETAIL (
+    ORDER_DETAIL_NO,
+    ORDER_NO,
+    PRODUCT_NO,
+    PRODUCT_NAME,
+    ORDER_COUNT,
+    PRODUCT_PRICE,
+    SIZE_NAME,
+    DISCOUNT_PRICE,
+    TOTAL_PRICE
+) VALUES (
+    #{orderDetailNo},
+    #{orderNo},
+    #{productNo},
+    #{productName},
+    #{orderCount},
+    #{productPrice},
+    #{sizeName},
+    #{discountPrice},
+    #{totalPrice}
+)
+</insert>
+</mapper>

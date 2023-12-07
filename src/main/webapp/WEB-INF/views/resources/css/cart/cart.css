@@ -1,0 +1,104 @@
+/* html{
+height: 61%;
+}
+
+body{
+height: 100%;
+}
+ */
+/*장바구니메인 전체 감싸는거*/
+.cart_container {
+display: flex;
+min-height: 80vh;
+margin-bottom: 50px;
+justify-content: center;
+margin-left: -20vw;
+}
+
+
+/*상품정보*/
+.cart_product{
+margin-top: 2vh;
+width: 70vw;
+}
+
+table, h2{
+text-align: center;
+margin-left:auto; 
+margin-right:auto;
+
+}
+
+table {
+border-collapse: collapse;
+}
+
+table .cart-head {
+border-top: 1px solid #e2dfdf;
+border-bottom: 1px solid #e2dfdf;
+background-color: #ddd;
+}
+
+table .cart-item {
+border-bottom: 1px solid #e2dfdf;
+}
+
+
+
+/*상품이미지*/
+.cart_item_img {
+width: 130px;
+height: 135px;
+margin: 30px;
+border: 1px solid #ccc;
+}
+
+/*버튼*/
+/* .btn{
+border: none;
+color: black;
+padding: 5px 10px;
+font-size: 13px;
+cursor: pointer;
+border-radius: 5px;
+margin: 9px 0;
+} */
+
+.btn_delete, .btn_allDelete {
+margin-top: 5px;
+width: 6vw;
+height: 4vh;
+border: 0;
+color: black;
+border: 1px solid black;
+background-color: white;
+}
+
+.btn_shopping, .btn_allOrder {
+margin-top: 5px;
+width: 12vw;
+height: 8vh;
+border: 1px solid #ccc;
+color: white;
+background-color: black;
+}
+
+button:hover {
+background-color: slateblue;
+color: white;
+}
+
+
+/*주문금액*/
+.order{
+margin-top: 8vh;
+padding-left: 100px;
+left:70%;
+position: absolute;
+}
+
+#total_price {
+font-family: Georgia, "맑은 고딕", serif;
+font-size: 32px;
+width:12vw;
+}

@@ -1,0 +1,102 @@
+@charset "UTF-8";
+/* 스타일 헤더(태그)*/
+nav {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border: 1px solid black;
+  background-color: none;
+}
+
+/*화면 나누기*/
+div.row {
+  padding-top: 100px;
+  display: inline;
+  width: 100%;
+  display: flex;
+  border: 1px solid none;
+}
+/*왼쪽 화면*/
+div.left {
+  width: 60%;
+  float: left;
+  box-sizing: border-box;
+  background: none;
+}
+/*왼쪽 화면사진*/
+div.left img {
+  width: 600px;
+  height: 800px;
+  margin-left: 200px;
+}
+/*오른쪽 화면*/
+div.right {
+  display: inline;
+  width: 40%;
+  height: 800px;
+  box-sizing: border-box;
+  background: none;
+  float: right;
+  position: fixed;
+  left: 51%;
+  margin-left: 50px;
+  margin-right: 100px;
+}
+
+/*프로필*/
+.profile {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: 20px;
+}
+/*프로필 사진*/
+.profile_img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  float: left;
+}
+/*프로필 아이디*/
+.user_id {
+  float: center;
+}
+
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+.p_detail_img {
+  display: inline;
+  width: 20%;
+  height: 50%;
+  margin: 0;
+  float: left;
+}
+.p_detail_info {
+  display: inline;
+  float: center;
+}
+
+/* style_menu*/
+.style_button {
+  border-radius: 30px;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+a {
+  text-decoration-line: none;
+  color: black;
+}

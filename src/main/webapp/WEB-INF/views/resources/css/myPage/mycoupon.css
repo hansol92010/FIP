@@ -1,0 +1,37 @@
+main{
+    width: 100%;
+	margin-bottom: 100px;
+	margin-top: 2%;
+
+}
+h1{
+    text-align: center;
+}
+
+.my_coupon{
+    width: 60%;
+    min-height: 60vh;
+    background-color: white;
+    margin: auto;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+}
+
+.my_coupon table{
+    border: 1px solid black;
+    background-color: white;
+    width: 90%;
+    margin: auto;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    text-align: center;
+}
+
+.tbl_h{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+    
+}

@@ -1,0 +1,334 @@
+@charset "UTF-8";
+/*폰트 적용*/
+body{
+	font-family:'Do Hyeon';
+}
+.st_btn{
+    display: flex;
+    margin-top: 2vh;
+    margin-left: 70vw;
+    width: 10vw;
+    justify-content: flex-end;
+}
+/*리스트 페이지로 돌아가는거*/
+.style_btn_list {
+	/* border: 1px soild black; */
+	background-color: black;
+	color: white;
+	border-radius: 20px;
+	font-size: 20px;
+	/* border-color: plum; */
+	font-family:'Do Hyeon';
+	width: 8vw;
+	height: 5vh;
+		
+}
+/*(내 게시물일때)삭제버튼*/
+.btn_style_Delete {
+	/* border: 1px soild black; */
+	background-color: black;
+	color: white;
+	border-radius: 20px;
+	font-size: 20px;
+	/* border-color: plum; */
+	font-family:'Do Hyeon';
+	width: 8vw;
+	height: 5vh;
+	
+}
+/*스타일 헤더 (브랜드 옵션 nav)*/
+nav .style_nav {
+  height: 70px;
+  line-height: 50px;
+  text-align: center;
+  background-color: black;
+  display: flex;
+}
+/*스타일 헤더(브랜드 항목)*/
+nav .style_brand {
+	margin: auto;
+	
+}
+/*스타일 헤더(각 브랜드 클래스)*/
+.category_Menu {
+	margin-left: 15px;
+	text-decoration-line: none;
+  	color: white;
+  	font-size: 20px;
+}
+/*스타일 헤더(각 브랜드 클래스) 호버*/
+.category_Menu:hover{
+	font-weight: bold;
+	color:pink;
+}
+
+.style_option_sort {
+	font-size: 30px;
+}
+
+/*메인 화면 div*/
+.style_view_main{
+	width: 80%;
+	margin: auto;
+}
+/*전체 div*/
+.style-main{
+    display: flex;
+    margin: auto;
+    width: 70%;
+    flex-direction: row;
+    padding: 1vw;
+}
+
+/*프로필 설정*/
+.style_profile {
+	display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+/*프로필 사진 설정*/
+.profile_img {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  overflow: hidden;
+  margin-left: 0px;
+}
+
+/*프로필 사진*/
+.profile_img img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	float: left;
+	margin-top: 0px;
+}
+/*프로필 닉네임 */
+.profile_user_info {
+  width: 500px;
+  height: 100px;
+  overflow: hidden;
+  margin-left: 10px;
+  margin-top: 0px;
+  font-size: 25px;
+}
+/*프로필 닉네임 */
+.profile_user_NickName {
+	margin: 5px 0px 0px 5px;
+	font-weight: bold;
+}
+
+/*프로필 좋아요 수*/
+.profile_like_count {
+	margin-top: 4px;
+	margin-left: 5px;
+}
+
+
+/******스타일 사진******/
+/*스타일 사진 */
+.style_view_img{
+	width: 800px;
+	margin: auto;
+}
+
+.style_view_img img{
+  width: 800px;
+  height: 900px;
+  margin-top: 20px;
+}
+
+/******게시물 내용******/
+
+.sboardTable{
+    width: 70%;
+    margin: auto;
+}
+
+.sboardTable tbody tr th{
+	padding-left: 1vw;
+	
+}
+
+.sboardTitle {
+    font-size: 20px;
+    text-align: center;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    padding: 1vh;
+    font-weight: bold;
+}
+.sboardContent{
+	font-size: 20px;
+	color: blue;
+    font-size: 20px;
+    text-align: left;
+    padding: 1vh;
+    padding-left: 5vw;
+    border-bottom: 1px solid black;
+    
+}
+
+
+/******상품 태그******/
+.shop_font {
+	font-weight: bold;
+	font-size: 25px;
+}
+/*상품 사진*/
+.shop_detail_img img{
+	width: 10vw;
+	height: 20vh;
+  margin: 0;
+  float: left;
+}
+
+/*상품 정보*/
+/*상품정보 전체*/
+.shop_detial_all {
+	border: 1px solid black;
+	width: 100%;
+}
+.shop_detail_info p{
+	text-align:center;
+	padding-top: 2vh;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.shop_detail{
+    width: 70%;
+    padding: 1vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+}
+
+
+/******댓글******/
+
+/*댓글 프로필*/
+.reply_profile{
+	display: flex;
+}
+
+/*댓글 프로필 사진 설정*/
+.reply_profile{
+	margin-top: 10px;
+    display: flex;
+    width: 100%;
+
+}
+/*댓글 프로필 이미지*/
+.reply_profile_img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  overflow: hidden;
+  margin-left: 0px;
+}
+
+/*댓글 프로필 사진*/
+.reply_profile_img img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	float: left;
+}
+
+/*댓글 작성자 */
+.reply-writer {
+	word-break: break-word;
+    margin-left: 10px;
+    font-weight: bold;
+    width: 10%;
+}
+
+/*댓글 내용*/
+.reply-content{
+    width: 77%;
+    margin-left: 20px;
+    word-break: break-word;
+	
+}
+/*댓글 내용 텍스트 박스*/
+.commemtContent {
+	margin-top: 20px;
+	width: 25vw;
+    height: 5vh;
+	border-radius: 30px;
+	padding-left: 20px;
+	padding-top:1vh;
+	border: 2px solid black;
+}
+/*댓글 등록 버튼*/
+.btn_Reply {
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+	
+}
+/*댓글 답변 버튼*/
+.reply_write_button{
+	float: right;
+	margin-top: 20px;
+	margin-left: 5px;
+	border: 1px soild black;
+	background-color: black;
+	color: white;
+	padding:5px;
+	border-radius: 20px;
+	font-size: 15px;
+	/* border-color: plum; */
+	font-family:'Do Hyeon';
+	width: 8vw;
+	height: 5vh;
+}
+/*댓글 삭제 버튼*/
+.style_Reply_Delete {
+	float: right;
+}
+.Reply_Delete img{
+	width: 15px;
+	height: 15px;
+	margin-top: 7px;
+}
+.Reply_Delete {
+	background-color: rgba(0,0,0,0);
+	border: none;
+}
+
+/******좋아요******/
+/*좋아요 하트 이미지*/
+.btn_like img {
+	width: 20px;
+	height: 20px;
+}
+.btn_like_after{
+	background-color: rgba(0,0,0,0);
+	border: none;
+}
+
+.item_img_div{
+    padding: 1vw;
+	width: 10vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.item_img_div div{
+margin-right: 1vw;
+}
+
+.sboard_info_div{
+	   width: 70%;
+    margin: auto;
+    padding: 1vw;
+}
+
+.item_name{
+	text-align: center;
+}

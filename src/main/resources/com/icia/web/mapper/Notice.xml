@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.web.dao.NoticeDao">
+
+<resultMap id="noticeResultMap" type="com.icia.web.model.Notice">
+	<id column = "NBOARD_NO" property="nboardNo" />
+	<result column="ADMIN_ID" property="adminId" />
+	<result column="NBOARD_TITLE" property="nboardTitle" />
+	<result column="NBOARD_CONTENT" property="nboardContent" />
+	<result column="NBOARD_REG_DATE" property="nboardRegDate" />
+</resultMap>
+
+<!-- 공지사항 게시물 수 조회 -->
+<select id="noticeListCount" parameterType="com.icia.web.model.Notice" resultType="int">
+	SELECT COUNT(NBOARD_NO) AS CNT
+	  FROM TBL_NOTICE
+	  WHERE 1=1
+<if test='nboardTitle != null and nboardTitle != ""'>
+	   AND NBOARD_TITLE LIKE '%' || #{nboardTitle} || '%'
+	</if>
+	<if test='nboardContent != null and nboardContent != ""'>
+	   AND NBOARD_CONTENT LIKE '%' || #{nboardContent} || '%'
+	</if>
+</select>
+
+<!-- 공지사항 리스트 조회 -->
+<select id="noticeList" parameterType="com.icia.web.model.Notice" resultMap="noticeResultMap">
+	SELECT NBOARD_NO,
+	       ADMIN_ID,
+	       NBOARD_TITLE,
+	       NBOARD_CONTENT,
+	       NBOARD_REG_DATE
+	  FROM(SELECT ROWNUM AS RNUM,
+	              NBOARD_NO,
+	              ADMIN_ID,
+	              NBOARD_TITLE,
+	              NBOARD_CONTENT,
+	              NBOARD_REG_DATE
+	         FROM (SELECT NBOARD_NO AS NBOARD_NO,
+	                      NVL(ADMIN_ID, '') AS ADMIN_ID,
+	                      NVL(NBOARD_TITLE, '') AS NBOARD_TITLE,
+	                      NVL(NBOARD_CONTENT,'') AS NBOARD_CONTENT,
+	                      NVL(TO_CHAR(NBOARD_REG_DATE, 'YYYY.MM.DD'), '') AS NBOARD_REG_DATE
+	                 FROM TBL_NOTICE
+	                WHERE 1=1  
+	<if test='nboardTitle != null and nboardTitle != ""'>
+	                  AND NBOARD_TITLE LIKE '%' || #{nboardTitle} || '%'
+	</if>
+	<if test='nboardContent != null and nboardContent != ""'>
+	                  AND NBOARD_CONTENT LIKE '%' || #{nboardContent} || '%'
+	</if>
+	             ORDER BY NBOARD_REG_DATE DESC))
+	 WHERE RNUM <![CDATA[>=]]> #{startRow}
+	   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+<!-- 공지사항 게시물 보기 (nbaordNo별로 조회) -->
+<select id="noticeView" parameterType="int" resultMap="noticeResultMap">
+	SELECT NBOARD_NO AS NBOARD_NO,
+           NVL(ADMIN_ID, '') AS ADMIN_ID,
+           NVL(NBOARD_TITLE, '') AS NBOARD_TITLE,
+           NVL(NBOARD_CONTENT, '') AS NBOARD_CONTENT,
+           NVL(TO_CHAR(NBOARD_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS NBOARD_REG_DATE
+      FROM TBL_NOTICE
+     WHERE NBOARD_NO = #{value}
+</select>
+
+<!-- 공지사항 게시물 조회(adminId 별로 조회 )-->
+<select id="noticeSelect" parameterType="String" resultMap="noticeResultMap">
+	SELECT NBOARD_NO AS NBOARD_NO,
+	       ADMIN_ID AS ADMIN_ID,
+	       NVL(NBOARD_TITLE, '') AS NBOARD_TITLE,
+	       NVL(NBOARD_CONTENT, '') AS NBOARD_CONTENT,
+	       NVL(TO_CHAR(NBOARD_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS NBOARD_REG_DATE
+	  FROM TBL_NOTICE
+	 WHERE ADMIN_ID = #{value}
+</select>
+
+<!--  공지사항 게시물 글쓰기 이연  -->
+<insert id="noticeInsert" parameterType="com.icia.web.model.Notice">
+<selectKey resultType="int" keyProperty="nboardNo" order="BEFORE">
+	SELECT TEST_TBL_NOTICE_SEQ.NEXTVAL FROM DUAL 
+</selectKey>
+	INSERT INTO TBL_NOTICE ( NBOARD_NO, ADMIN_ID, NBOARD_TITLE, NBOARD_CONTENT, NBOARD_REG_DATE ) 
+		VALUES ( #{nboardNo}, #{adminId}, #{nboardTitle}, #{nboardContent}, SYSDATE )
+</insert>
+
+<!-- 공지사항 게시물 삭제 -->
+<delete id="noticeDelete" parameterType="int">
+	DELETE FROM TBL_NOTICE
+	 WHERE NBOARD_NO = #{value}
+</delete>
+
+<!-- 공지사항 게시물 수정 -->
+<update id = "noticeUpdate" parameterType="com.icia.web.model.Notice">
+	UPDATE TBL_NOTICE
+	   SET NBOARD_TITLE = #{nboardTitle},
+	       NBOARD_CONTENT = #{nboardContent}
+	 WHERE NBOARD_NO = #{nboardNo}
+</update>
+
+</mapper>

@@ -1,0 +1,617 @@
+
+/*header아래 상단바 브랜드 태그*/
+nav {
+  height: 50px;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 50px;
+}
+
+/*메인페이지-이미지*/
+.img1 img {
+  width: 55%;
+  height: 680px;
+  padding-top: 50px;
+  padding-left: 130px;
+  margin-left: -100px;
+  
+}
+
+/*인기순/최신순*/
+.style_align
+{
+  text-align: right;
+}
+
+/*상세페이지 -스타일 사진*/
+.img_d img{
+  width: 100%;
+  height: 700px;
+}
+
+/*상세페이지-회원이미지 프로필사진*/
+.profile{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: 20px;
+  display: inline;
+  margin: 0;
+  float: left;
+  
+  
+ 
+}
+.profile_img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+/*상세페이지-화면분할*/
+div.row {
+  margin-top: 30px;
+  display: inline;
+  width: 100%;
+  display: flex;
+  border: 1px solid none;
+}
+div.left {
+  width: 50%;
+  float: left;
+  box-sizing: border-box;
+  background: none;
+}
+div.right {
+  width: 50%;
+  height: 800px;
+  box-sizing: border-box;
+  background: none;
+  float: right;
+  position: fixed;
+  overflow-y: scroll;
+  left: 51%;
+  display: inline;
+}
+
+
+element.style {
+  left: 52%;
+}
+
+/*상세페이지-회원 아이디*/
+.user_id{
+  padding-right: 50px;
+  float:center;
+  margin-top: 50px;
+  margin-left: 100px;
+ 
+}
+
+/*상세페이지-상품 이미지*/
+.p_detail_img
+{
+  width: 20%;
+  height: 20%;
+  display: inline;
+  margin: 0;
+  float: left;
+}
+
+/*상세페이지-상품 설명*/
+.p_detail_explain
+{
+  
+  float:center;
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+/*상세페이지-자기가 넣는 태그*/
+.btn_mytag
+{
+  text-align: left;
+}
+
+/*상세페이지-댓글*/
+.comment_title
+{
+  border-width: 3px;
+  border-color: black;
+  border-style: solid;
+  width: 700px;
+  height: 50px;
+}
+
+/*상세페이지-댓글*/
+.comment
+{
+  border-width: 3px;
+  border-color: black;
+  border-style: solid;
+  width: 700px;
+  height: 100px;
+}
+
+/*글쓰기 이미지 첨부*/
+.img_write img
+{
+  width: 60%;
+  height:70%;
+  margin-left: 15%;
+}
+
+/*글쓰기 박스*/
+.write1 {
+
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  width: 740px;
+  height: 150px;
+
+}
+
+/*글쓰기/취소 버튼*/
+.write_submit
+{
+  text-align: right;
+  margin-right: 7%;
+}
+
+.form-control
+{
+  width: 100%;
+    height: 6.25em;
+    
+    resize: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+a{
+  text-decoration-line: none;
+  color: black;
+}
+.Header{
+  display: flex;
+  position: sticky;
+  top: 0px;
+  right: 0px;
+  padding: 39px;
+  z-index: 9999;
+  background-color: rgb(255, 255, 255);
+  border: 30px;
+}
+.top_inner{
+background-color: rgb(255, 255, 255);
+
+}
+.top_list{
+  display: flex;
+  position: absolute;
+  top: 0px; right: 0;
+}
+.top_link{
+font-size: 12px;
+color: black;
+margin-left: 20px;
+}
+.top_header_ul{
+  display: flex;
+ 
+  top: 20px; right: 0;
+  padding: 8px 40px 0;
+  height: 22px;
+}
+.top_header_ul{
+display: flex;
+top: 20px;
+right: 0;
+padding: 0px 40px 0;
+height: 22px;
+}
+.logo{
+  color: black;
+  font-size: 20px;
+}
+.www{
+  display: flex;
+  position: absolute;
+  top: 20px; right: 0;
+  padding: 18px 40px 0;
+  height: 22px;
+}
+.menu{
+  display: flex;
+  padding-left: 60px;
+  color: black;
+}
+.slide_spaes{
+  display: flex;
+
+}
+/* 슬라이드 시작부분 */
+.slide {
+  /* layout */
+  display: flex;
+  flex-wrap: nowrap;
+  /* 컨테이너의 내용물이 컨테이너 크기(width, height)를 넘어설 때 보이지 않도록 하기 위해 hidden을 준다. */
+  overflow: hidden;
+
+  /* position */
+  /* slide_button의 position absolute가 컨테이너 안쪽에서 top, left, right offset이 적용될 수 있도록 relative를 준다. (기본값이 static인데, static인 경우 그 상위 컨테이너로 나가면서 현재 코드에선 html을 기준으로 offset을 적용시키기 때문) */
+  position: relative;
+
+  /* size */
+  width: 100%;
+
+  /* slide drag를 위해 DOM요소가 드래그로 선택되는것을 방지 */
+  user-select: none;
+}
+.slide_item {
+  /* layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* position - 버튼 클릭시 left offset값을 적용시키기 위해 */
+  position: relative;
+  left: 0px;
+
+  /* size */
+  width: 100%;
+  height: 500px;
+  /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
+  flex-shrink: 0;
+
+  /* transition */
+  transition: left 0.15s;
+}
+.slide_button {
+  /* layout */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* position */
+  position: absolute;
+  /* 버튼이 중앙에 위치하게 하기위해 계산 */
+  top: calc(50% - 16px);
+
+  /* size */
+  width: 32px;
+  height: 32px;
+
+  /* style */
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.slide_prev_button {
+  left: 10px;
+}
+.slide_next_button {
+  right: 10px;
+}
+
+/* 각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용 */
+.slide_item.item1 {
+  background-color: rgb(207, 121, 51);
+  width: 100%;
+}
+.slide_item.item2 {
+  background-color: rgb(149, 228, 228);
+  width: 100%;
+}
+.slide_item.item3 {
+  background-color: rgb(200, 148, 249);
+  width: 100%;
+}
+.slide_item.item4 {
+  background-color: rgb(246, 191, 119);
+  width: 100%;
+}
+.slide_item.item5 {
+  background-color: rgb(138, 161, 203);
+  width: 100%;
+}
+
+/* 페이지네이션 스타일 */
+ul,
+li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.slide_pagination {
+  /* layout */
+  display: flex;
+  gap: 5px;
+
+  /* position */
+  position: absolute;
+  bottom: 0;
+  /* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
+  left: 50%;
+  transform: translateX(-50%);
+}
+.slide_pagination > li {
+  /* 현재 슬라이드가 아닌 것은 투명도 부여 */
+  color: #00000188;
+  cursor: pointer;
+  font-size: 25px;
+}
+.slide_pagination > li.active {
+  /* 현재 슬라이드 색상은 투명도 없이 */
+  color: #fcfcfc;
+}
+
+.slide_item_duplicate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 0px;
+  width: 100%;
+  height: 300px;
+  flex-shrink: 0;
+  transition: left 0.15s;
+}
+/* 이미지 */
+/* CSS */
+.grid-image {
+display:flex;
+flex-wrap:wrap;
+align-items:flex-start;
+margin:30px 0px 20px 30px;
+border-radius: 9px;
+
+}
+.grid-image img {
+width:calc(95.333% - 10px);
+margin:0 0px 15px 0;
+
+}
+.grid-image img:nth-of-type(3n),
+.grid-image img:last-child {
+margin-right:0;
+
+}
+.grid-image > ul{
+display: flex;
+justify-content: center;
+
+
+}
+
+.grid-image >ul > li{
+object-fit: cover;
+  width: 100%;
+  height: 100%;
+  image-rendering: auto;
+}
+.main_img{
+
+border-radius: 400px;
+margin: 2px 2px 2px 2px;
+
+}
+@media screen and (max-width:640px){
+.grid-image img {
+width:calc(50% - 15px);
+}
+}
+@media screen and (max-width:480px){
+.grid-image img:nth-of-type(2n) {
+margin-right:0;
+}
+.grid-image img:nth-of-type(3n) {
+margin-right:15px;
+}
+}
+.popularity{
+display: flex;
+justify-content: center;
+font-size: 17px;
+  font-weight: 700;
+  color: #000;
+  padding: 20px;
+  
+}
+.sub_title{
+font-size: 15px;
+  color: rgba(34,34,34,.5);
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 262px;
+  
+
+}
+.btn-img {
+border: none;
+padding: 0;
+margin: 0;
+display: block;
+width: 200px; /* 버튼 너비 */
+height: 200px; /* 버튼 높이 */
+background-color: transparent;
+}
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.main_shop{
+  max-width: 100%;
+  margin: auto;
+  padding: 0 15px 0 15px;
+}
+.shop_main{
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.swuier-wrapper{
+  transform: translate3d(0px, 0px, 0px);
+  position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    -ms-transition-property: -ms-transform;
+    transition-property: transform;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.swiper-slids{
+  width: 308px;
+  margin-right: 20px;
+  margin-left: 20px ;
+  -webkit-flex-shrink: 0;
+  -ms-flex: 0 0 auto;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.ec-base-product{
+  margin: 22px 0 0;
+}
+.main_contents .box .foto3 {
+  background: url(/img/뉴진스사진.jpg) top center no-repeat;
+  background-size: cover;
+}
+.main_contents .box .foto {
+  width: 100%;
+  cursor: pointer;
+}
+.main_contents .box .foto:before {
+  content: "";
+  display: block;
+  padding-bottom: 103%;
+}
+.swiper-container {
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.prev-slide,
+.next-slide {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.prev-slide {
+  left: 20px;
+}
+
+.next-slide {
+  right: 20px;
+}
+
+.below{
+  display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    flex-direction: row-reverse;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding-bottom: 56px;
+    border-bottom: 1px solid #ebebeb;
+}
+.below_detail{
+  display: -webkit-box;
+  display: flex;
+}
+
+.below_aa{
+  font-size: 16px;
+  letter-spacing: -.16px;
+  margin: 0px 40px 0px 20px;
+}
+.below_link{
+  
+    font-size: 14px;
+    letter-spacing: -.21px;
+    color: rgba(34,34,34,.5);
+    
+}
+
+

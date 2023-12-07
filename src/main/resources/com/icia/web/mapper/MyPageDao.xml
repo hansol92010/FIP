@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.icia.web.dao.MyPageDao">
+
+	<resultMap type="com.icia.web.model.CouponCase" id="CouponCaseResultMap">
+		<result column="COUPON_NAME" property="couponName"/>
+		<result column="COUPON_STATUS" property="couponStatus"/>
+		<result column="EXPIRATION_DATE" property="expirationDate"/>
+	</resultMap>
+	
+	<resultMap id="sboardResultMap" type="com.icia.web.model.Sboard">
+		<id column="SBOARD_NO" property="sboardNo" />
+		<result column="USER_ID" property="userId" />
+		<result column="SBOARD_TITLE" property="sboardTitle" />
+		<result column="SBOARD_CONTENT" property="sboardContent" />
+		<result column="READ_COUNT" property="readCount" />
+		<result column="LIKE_COUNT" property="likeCount" />
+		<result column="BRAND_CODE" property="brandCode" />
+		<result column="USER_NICKNAME" property="userNickName"/>
+		<result column="SBOARD_REG_DATE" property="sboardRegDate"/>
+	</resultMap>
+
+<select id="myCouponCaseList" parameterType="String" resultMap="CouponCaseResultMap">
+	SELECT NVL(B.COUPON_NAME, '') AS COUPON_NAME,
+	       NVL(A.COUPON_STATUS, '') AS COUPON_STATUS,
+	       NVL(TO_CHAR(B.EXPIRATION_DATE, 'YYYY-MM-DD'), '') AS EXPIRATION_DATE
+	  FROM TBL_COUPON_CASE A, TBL_COUPON B
+	 WHERE A.COUPON_CODE = B.COUPON_CODE
+	   AND A.USER_ID = #{value}
+	 ORDER BY B.EXPIRATION_DATE ASC
+</select>	
+
+<!-- 회원정보 변경 닉네임 중복 체크  -->
+<select id="nicknameDuplicateCheck" parameterType="String" resultType="int">
+	SELECT COUNT(USER_NICKNAME)
+	  FROM TBL_USER
+	 WHERE USER_NICKNAME = #{value}
+</select>
+
+<!-- 내가 쓴 스타일 게시글 리스트 카운트 -->
+<select id="myStyleCount" parameterType="String" resultType="int">
+	SELECT COUNT(SBOARD_NO)
+	  FROM TBL_SBOARD
+	 WHERE USER_ID = #{value}
+</select>
+
+
+<!-- 내가 쓴 스타일 게시글 리스트 -->
+<select id="myStyleList" parameterType="com.icia.web.model.Sboard" resultMap="sboardResultMap">
+SELECT SBOARD_NO,
+       USER_ID,
+       SBOARD_TITLE,
+       SBOARD_CONTENT,
+       READ_COUNT,
+       LIKE_COUNT,
+       BRAND_CODE,
+       SBOARD_REG_DATE
+  FROM (SELECT ROWNUM AS RNUM,
+               SBOARD_NO,
+               USER_ID,
+               SBOARD_TITLE,
+               SBOARD_CONTENT,
+               READ_COUNT,
+               LIKE_COUNT,
+               BRAND_CODE,
+               SBOARD_REG_DATE
+          FROM (SELECT SBOARD_NO,
+                       NVL(USER_ID, '') AS USER_ID,
+                       NVL(SBOARD_TITLE, '') AS SBOARD_TITLE,
+                       NVL(SBOARD_CONTENT, '') AS SBOARD_CONTENT,
+                       NVL(READ_COUNT, 0) AS READ_COUNT,
+                       NVL(LIKE_COUNT, 0) AS LIKE_COUNT,
+                       NVL(BRAND_CODE, '') AS BRAND_CODE,
+                       NVL(TO_CHAR(SBOARD_REG_DATE, 'YYYY-MM-DD HH:MI:SS'), '') AS SBOARD_REG_DATE
+                  FROM TBL_SBOARD
+                 WHERE USER_ID = #{userId}
+                 ORDER BY SBOARD_REG_DATE DESC))
+         WHERE RNUM <![CDATA[>=]]> #{startRow}
+           AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+<!-- 내가 좋아요 누른 글 리스트 카운트 -->
+<select id="myLikeStyleListCount" parameterType="String" resultType="int">
+	SELECT COUNT(SBOARD_NO)
+	  FROM TBL_SBOARD_LIKE
+	 WHERE USER_ID = #{value}
+</select>
+
+<!-- 내가 좋아요 누른 스타일글 리스트 -->
+<select id="myLikeStyleList" parameterType="com.icia.web.model.Sboard" resultMap="sboardResultMap">
+	SELECT SBOARD_NO,
+	       USER_ID,
+	       SBOARD_TITLE,
+	       SBOARD_CONTENT,
+	       READ_COUNT,
+	       LIKE_COUNT,
+	       BRAND_CODE,
+	       SBOARD_REG_DATE
+	  FROM (SELECT ROWNUM AS RNUM,
+	               SBOARD_NO,
+	               USER_ID,
+	               SBOARD_TITLE,
+	               SBOARD_CONTENT,
+	               READ_COUNT,
+	               LIKE_COUNT,
+	               BRAND_CODE,
+	               SBOARD_REG_DATE
+	          FROM (SELECT A.SBOARD_NO AS SBOARD_NO,
+	                       NVL(A.USER_ID, '') AS USER_ID,
+	                       NVL(A.SBOARD_TITLE, '') AS SBOARD_TITLE,
+	                       NVL(A.SBOARD_CONTENT, '') AS SBOARD_CONTENT,
+	                       NVL(A.READ_COUNT, 0) AS READ_COUNT,
+	                       NVL(A.LIKE_COUNT, 0) AS LIKE_COUNT,
+	                       NVL(A.BRAND_CODE, ' ') AS BRAND_CODE,
+	                       NVL(TO_CHAR(A.SBOARD_REG_DATE, 'YYYY-MM-DD HH:MI:SS'), '') AS SBOARD_REG_DATE
+	                  FROM TBL_SBOARD A, TBL_SBOARD_LIKE B
+	                 WHERE A.SBOARD_NO = B.SBOARD_NO
+	                   AND B.USER_ID = #{userId}
+	                 ORDER BY SBOARD_REG_DATE DESC))
+	 WHERE RNUM <![CDATA[>=]]> #{startRow}
+	   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+</mapper>
+
+
+
+
+

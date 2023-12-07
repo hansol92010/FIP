@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.icia.web.dao.UserDao">
+	
+<resultMap type="com.icia.web.model.User" id="userResultMap">
+	<id column="USER_ID" property="userId"></id>
+	<result column="USER_PWD" property="userPwd"></result>
+	<result column="USER_NAME" property="userName"></result>
+	<result column="USER_EMAIL" property="userEmail"></result>
+	<result column="USER_NICKNAME" property="userNickname"></result>
+	<result column="USER_PHONE_NO" property="userPhoneNo"></result>
+	<result column="USER_ADDRESS" property="userAddress"></result>
+	<result column="USER_STATUS" property="userStatus"></result>
+	<result column="USER_REG_DATE" property="userRegDate"></result>
+	<result column="USER_POSTCODE" property="userPostcode"></result>
+	<result column="USER_DETAILADDRESS" property="userDetailAddress"></result> 
+	<result column="USER_EXTRAADDRESS" property="userExtraAddress"></result>
+</resultMap>
+
+<select id="userSelect" parameterType="String" resultMap="userResultMap">
+	SELECT USER_ID,
+	       NVL(USER_PWD, '') AS USER_PWD,
+	       NVL(USER_NAME, '') AS USER_NAME,
+	       NVL(USER_EMAIL, '') AS USER_EMAIL,
+	       NVL(USER_NICKNAME, '') AS USER_NICKNAME,
+	       NVL(USER_PHONE_NO, '') AS USER_PHONE_NO,
+	       NVL(USER_ADDRESS, '') AS USER_ADDRESS,
+	       NVL(USER_STATUS, 'N') AS USER_STATUS,
+	       NVL(TO_CHAR(USER_REG_DATE, 'YYYY-MM-DD HH24:MI:SS'), '') AS USER_REG_DATE,
+	       NVL(USER_POSTCODE, 0) AS USER_POSTCODE,
+	       NVL(USER_DETAILADDRESS, '') AS USER_DETAILADDRESS,
+	       NVL(USER_EXTRAADDRESS, '') AS USER_EXTRAADDRESS	       
+	  FROM TBL_USER
+	 WHERE USER_ID = #{userId}
+</select>
+
+<select id="userEmailDuplicateCheck" parameterType="String" resultType="int">
+	SELECT COUNT(USER_EMAIL)
+	  FROM TBL_USER
+	 WHERE USER_EMAIL = #{value}
+</select>
+
+<select id="userNicknameDuplicateCheck" parameterType="String" resultType="int">
+	SELECT COUNT(USER_NICKNAME)
+	  FROM TBL_USER
+	 WHERE USER_NICKNAME = #{value}
+</select>
+
+<insert id="userReg" parameterType="com.icia.web.model.User">
+	INSERT INTO TBL_USER (
+			    USER_ID, USER_PWD, USER_NAME, USER_EMAIL, USER_NICKNAME, USER_PHONE_NO, USER_ADDRESS,
+			    USER_STATUS, USER_REG_DATE,USER_POSTCODE, USER_DETAILADDRESS,USER_EXTRAADDRESS)
+			    
+			    VALUES (
+			    #{userId}, #{userPwd}, #{userName}, #{userEmail}, #{userNickname}, 
+			    #{userPhoneNo}, #{userAddress}, #{userStatus}, SYSDATE, #{userPostcode},#{userDetailAddress},#{userExtraAddress})
+</insert>
+
+<update id="userUpdate" parameterType="com.icia.web.model.User">
+	UPDATE TBL_USER
+	   SET USER_NICKNAME = #{userNickname},
+	       USER_PHONE_NO = #{userPhoneNo},
+	       USER_ADDRESS = #{userAddress},
+	       USER_POSTCODE =  #{userPostcode},
+	       USER_DETAILADDRESS = #{userDetailAddress},
+	       USER_EXTRAADDRESS = #{userExtraAddress}
+	 WHERE USER_ID = #{userId}
+</update>
+
+<delete id="userDelete" parameterType="String">
+	UPDATE TBL_USER
+	   SET USER_STATUS = 'N'
+	 WHERE USER_ID = #{value}
+</delete>
+	
+<!-- =============================관리자 회원관리================================== -->
+<!-- 회원 수 조회 미지 -->
+<select id="userListCount" parameterType="com.icia.web.model.User" resultType="long">
+	SELECT COUNT(USER_ID) AS CNT
+	  FROM TBL_USER   
+	 WHERE 1 = 1  
+<if test='userId != null and userId != ""'>	 
+AND USER_ID LIKE '%' || #{userId} || '%'
+</if>	   
+<if test='userName != null and userName != ""'>
+AND USER_NAME LIKE '%' || #{userName} || '%'
+</if>	   
+<if test='userStatus != null and userStatus != ""'>
+AND USER_STATUS LIKE '%' || #{userStatus} || '%'
+</if>
+</select>
+
+<!-- 회원 리스트 미지 -->
+<select id="userList" parameterType="com.icia.web.model.User" resultMap="userResultMap">
+	SELECT  USER_ID,
+	        USER_PWD,
+	        USER_NAME,
+	        USER_EMAIL,
+	        USER_NICKNAME,
+	        USER_PHONE_NO,
+	        USER_ADDRESS,
+	        USER_STATUS,
+	        USER_REG_DATE,
+	        USER_POSTCODE,
+	        USER_DETAILADDRESS,
+	        USER_EXTRAADDRESS 
+		 FROM(SELECT ROWNUM AS RNUM,
+		               USER_ID,
+		               USER_PWD,
+		               USER_NAME,
+		               USER_EMAIL,
+	                   USER_NICKNAME,
+	                   USER_PHONE_NO,
+	                   USER_ADDRESS,
+		               USER_STATUS,
+		               USER_REG_DATE,
+		               USER_POSTCODE,
+				       USER_DETAILADDRESS,
+				       USER_EXTRAADDRESS  
+		        FROM( SELECT USER_ID,
+		                     NVL(USER_PWD, '') AS USER_PWD,
+		                     NVL(USER_NAME, '') AS USER_NAME,
+		                     NVL(USER_EMAIL, '') AS USER_EMAIL,
+	                         NVL(USER_NICKNAME, '') AS USER_NICKNAME,
+	                         NVL(USER_PHONE_NO, '') AS USER_PHONE_NO,
+	                         NVL(USER_ADDRESS, '') AS USER_ADDRESS,
+		                     NVL(USER_STATUS, '') AS USER_STATUS,
+		                     NVL(TO_CHAR(USER_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS USER_REG_DATE,
+		                     NVL(USER_POSTCODE, 0) AS USER_POSTCODE,
+	       					 NVL(USER_DETAILADDRESS, '') AS USER_DETAILADDRESS,
+	       					 NVL(USER_EXTRAADDRESS, '') AS USER_EXTRAADDRESS	   
+		              FROM TBL_USER
+		             WHERE 1 = 1  
+	 <if test='userId != null and userId != ""'>	 
+	  			 AND USER_ID LIKE '%' || #{userId} || '%'
+	</if>	   
+	<if test='userName != null and userName != ""'>
+	   			AND USER_NAME LIKE '%' || #{userName} || '%'
+	</if>	   
+	<if test='userStatus != null and userStatus != ""'>
+	   			AND USER_STATUS LIKE '%' || #{userStatus} || '%'
+	</if>	   
+	                ORDER BY USER_REG_DATE DESC))
+	 WHERE RNUM <![CDATA[>=]]> #{startRow}
+	   AND RNUM <![CDATA[<=]]> #{endRow}   
+	                
+
+</select>
+
+<!--회원 조회  userSelect 위쪽에 있음
+<select id="userSelect" parameterType="String" resultMap="userResultMap">
+	SELECT USER_ID,
+	       NVL(USER_PWD, '') AS USER_PWD,
+	       NVL(USER_NAME, '') AS USER_NAME,
+	       NVL(USER_EMAIL, '') AS USER_EMAIL,
+	       NVL(USER_NICKNAME, '') AS USER_NICKNAME,
+	       NVL(USER_PHONE_NO, '') AS USER_PHONE_NO,
+	       NVL(USER_ADDRESS, '') AS USER_ADDRESS,
+	       NVL(USER_STATUS, 'N') AS USER_STATUS,
+	       NVL(TO_CHAR(USER_REG_DATE, 'YYYY-MM-DD HH24:MI:SS'), '') AS USER_REG_DATE
+	  FROM TBL_USER
+	 WHERE USER_ID = #{userId}
+</select>-->
+
+<!-- 회원정보 수정 미지-->
+<update id="adminUserUpdate" parameterType="com.icia.web.model.User">
+	UPDATE TBL_USER
+		SET USER_PWD = #{userPwd},
+		    USER_NAME = #{userName},
+		    USER_EMAIL = #{userEmail},
+		  	USER_NICKNAME = #{userNickname},
+		    USER_PHONE_NO = #{userPhoneNo},
+		    USER_ADDRESS = #{userAddress},
+		    USER_STATUS = #{userStatus},
+		    USER_POSTCODE =  #{userPostcode},
+	        USER_DETAILADDRESS = #{userDetailAddress},
+	        USER_EXTRAADDRESS = #{userExtraAddress}
+		WHERE USER_ID = #{userId}
+</update>
+	
+</mapper>

@@ -1,0 +1,58 @@
+
+body{
+	background-color: rgb(255, 255, 255);;
+	margin:0;
+}
+main{
+    width: 100%;
+    overflow: hidden;
+    margin-top: 100px;
+    margin-bottom: 250px;
+	background-color: rgb(255, 255, 255);;
+}
+
+.login-back{
+    width: 700px;
+    margin: auto;
+    padding: 60px 0 120px;
+    border: 2px solid black;
+    border-radius: 5%;
+}
+
+.login{
+    margin: auto;
+    width: 250px;
+}
+.login-title{
+    display: inline-block;
+    width: 250px;
+    height: 50px;
+    background-size: 250px 50px;
+    padding-bottom: 50px;
+    background: url(/resources/images/loginPage.png) no-repeat;	/*로그인 페이지 FIP 사진*/
+}
+.login label{
+    font-weight: bold;
+    margin-top: 30px;
+}
+.login input{
+    margin-top: 5px;
+    font-size: 20px;
+    border: 0;
+    border-bottom: 2px solid gray;
+    margin-bottom: 5px;
+    background-color: rgb(255, 255, 255);
+}
+.login button{
+  	font-size: large;
+    background-color: #ffffff00;
+    border: 0;
+    border-radius: 8%;
+    margin: 5px;
+    width: 100px;
+    font-weight: bold;
+}
+
+.login label div{
+	height: 18px;
+}

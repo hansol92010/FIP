@@ -1,0 +1,72 @@
+main{
+    width: 100%;
+    min-height: 100vh;
+
+    
+}
+
+.my_zzim{
+    width: 60%;
+    margin: auto;
+    padding: 1%;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    margin-top: 2vw;
+    padding-bottom: 4vw;
+    margin-bottom: 4vw;
+    min-height: 30vh;
+}
+
+.my_zzim h1{
+    text-align: center;
+}
+
+.zzim_tbl{
+    width: 90%;
+    border: 1px solid black;
+    margin: auto;
+    margin-top: 3%;
+    text-align: center;
+}
+
+.zzim_thead{
+    font-size: larger;
+    font-weight: bold;
+}
+
+.myzzim_img{
+    width: 150px;
+    height: 150px;
+}
+
+.myzzim_div{
+    width: 150px;
+    margin: auto;
+}
+
+.zzim_title{
+    word-break: break-all;
+    width: 30%;
+}
+.zzim_title a{
+    text-decoration: none;
+}
+.zzim_name{
+    color: black;
+}
+
+.zzim_pay{
+    width: 25%;
+}
+
+.zzim_btn{
+    border: 0;
+    background-color: white;
+    font-size: large;
+    font-weight: bold;
+}
+
+
+.zzim_btn:hover{
+    font-size: larger;
+}

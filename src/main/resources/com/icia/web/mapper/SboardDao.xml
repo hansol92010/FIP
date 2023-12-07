@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.web.dao.SboardDao" >
+
+<resultMap id="sboardResultMap" type="com.icia.web.model.Sboard">
+	<id column="SBOARD_NO" property="sboardNo" />
+	<result column="USER_ID" property="userId" />
+	<result column="SBOARD_TITLE" property="sboardTitle" />
+	<result column="SBOARD_CONTENT" property="sboardContent" />
+	<result column="READ_COUNT" property="readCount" />
+	<result column="LIKE_COUNT" property="likeCount" />
+	<result column="BRAND_CODE" property="brandCode" />
+	<result column="USER_NICKNAME" property="userNickName"/>
+	<result column="SBOARD_REG_DATE" property="sboardRegDate"/>
+</resultMap>
+
+<!--  댓글  -->
+<resultMap id="sboardCommentResultMap" type="com.icia.web.model.SboardComment">
+	<id column="SBOARD_COMMENT_NO" property="sboardCommentNo"/>
+	<result column="SBOARD_NO" property="sboardNo"/>
+	<result column="COMMENT_USER_ID" property="commentUserId"/>
+	<result column="COMMENT_CONTENT" property="commentContent"/>
+	<result column="COMMENT_REG_DATE" property="commentRegDate"/>
+</resultMap>
+
+<!--  좋아요  -->
+<resultMap id="sboardLikeMap" type="com.icia.web.model.SboardLike">
+	<id column="LIKE_NO" property="likeNo"/>
+	<result column="SBOARD_NO" property="sboardNo"/>
+	<result column="USER_ID" property="userId"/>
+</resultMap>
+
+<!-- 스타일상세에서 상품정보 불러오기 -->
+<resultMap id="sboardProductInfoNoMap" type="com.icia.web.model.SboardProductInfoNo">
+	<id column="SBOARD_NO" property="sboardNo"/>
+	<result column="PRODUCT_NO" property="productNo"/>
+</resultMap>
+
+<!-- 총 스타일 수 조회  민정-->
+<select id="allStyleCount" parameterType="com.icia.web.model.Sboard" resultType="int">
+	SELECT COUNT(SBOARD_NO) AS CNT
+	  FROM TBL_SBOARD
+</select>
+
+<!-- 스타일 게시판 조회  민정 -->
+<select id="allStyleList" parameterType="com.icia.web.model.Sboard" resultMap="sboardResultMap">
+		SELECT SBOARD_NO,
+		       USER_ID,
+		       SBOARD_TITLE,
+		       SBOARD_CONTENT,
+		       READ_COUNT,
+		       LIKE_COUNT,  
+		       BRAND_CODE,
+		       SBOARD_REG_DATE,
+               USER_NICKNAME
+		    FROM(SELECT ROWNUM AS RNUM,
+		              SBOARD_NO,
+		              USER_ID,
+		              SBOARD_TITLE,
+		              SBOARD_CONTENT,
+		              READ_COUNT,
+		              LIKE_COUNT,
+		              BRAND_CODE,
+		              SBOARD_REG_DATE,
+                      USER_NICKNAME
+		          FROM (SELECT A.SBOARD_NO,
+		                       NVL(A.USER_ID, '') AS USER_ID,
+		                       NVL(A.SBOARD_TITLE, '') AS SBOARD_TITLE,
+		                       NVL(A.SBOARD_CONTENT, '') AS SBOARD_CONTENT,
+		                       NVL(A.READ_COUNT, 0) AS READ_COUNT,
+		                       NVL(A.LIKE_COUNT, 0) AS LIKE_COUNT,
+		                       NVL(A.BRAND_CODE, '') AS BRAND_CODE,
+		                       NVL(TO_CHAR(A.SBOARD_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS SBOARD_REG_DATE,
+                               NVL(B.USER_NICKNAME, '') AS USER_NICKNAME
+		                  FROM TBL_SBOARD A, TBL_USER B 
+                        WHERE A.USER_ID = B.USER_ID        
+	<choose>
+	
+		<when test='optionSelect == "1"'>
+		 				  ORDER BY SBOARD_REG_DATE DESC
+		</when>
+		<when test='optionSelect == "2"'>
+		 				  ORDER BY LIKE_COUNT DESC
+		</when>
+	
+	</choose>
+ 									))
+</select>
+
+<!-- 브랜드 별 스타일 총 수  민정-->
+<select id="styleBrandCount" parameterType="String" resultType="int">
+		SELECT COUNT(SBOARD_NO) AS CNT
+		  FROM TBL_SBOARD
+		 WHERE BRAND_CODE = #{value}
+</select>
+
+<!-- 브랜드 별 스타일 조회 민정-->
+<select id="styleBrandSelect" parameterType="com.icia.web.model.Sboard" resultMap="sboardResultMap">
+SELECT SBOARD_NO,
+          USER_ID,
+          SBOARD_TITLE,
+          SBOARD_CONTENT,
+          READ_COUNT,
+          LIKE_COUNT,  
+          BRAND_CODE,
+          SBOARD_REG_DATE,
+          USER_NICKNAME
+       FROM(SELECT ROWNUM AS RNUM,
+                 SBOARD_NO,
+                 USER_ID,
+                 SBOARD_TITLE,
+                 SBOARD_CONTENT,
+                 READ_COUNT,
+                 LIKE_COUNT,
+                 BRAND_CODE,
+                 SBOARD_REG_DATE,
+                 USER_NICKNAME
+             FROM (SELECT A.SBOARD_NO,
+                          A.USER_ID,
+                          NVL(A.SBOARD_TITLE, '') AS SBOARD_TITLE,
+                          NVL(A.SBOARD_CONTENT, '') AS SBOARD_CONTENT,
+                          NVL(A.READ_COUNT, 0) AS READ_COUNT,
+                          NVL(A.LIKE_COUNT, 0) AS LIKE_COUNT,
+                          NVL(A.BRAND_CODE, '') AS BRAND_CODE,
+                          NVL(TO_CHAR(SBOARD_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS SBOARD_REG_DATE,
+                          NVL(B.USER_NICKNAME, '') AS USER_NICKNAME
+                     FROM TBL_SBOARD A, TBL_USER B
+                    WHERE A.USER_ID = B.USER_ID
+                 <choose>
+
+   <when test='optionSelect == "1"'>
+                  ORDER BY SBOARD_REG_DATE DESC
+   </when>
+   <when test='optionSelect == "2"'>
+                  ORDER BY LIKE_COUNT DESC
+   </when>
+
+</choose>
+                           ))
+    WHERE BRAND_CODE = #{brandCode}
+</select>
+
+<!-- 스타일 게시물 보기  민정-->
+<select id="sboardSelect" parameterType="int" resultMap="sboardResultMap">
+	SELECT A.SBOARD_NO,
+	       A.USER_ID,
+	       NVL(A.SBOARD_TITLE, '') AS SBOARD_TITLE,
+	       NVL(A.SBOARD_CONTENT, '') AS SBOARD_CONTENT,
+	       NVL(A.READ_COUNT, 0) AS READ_COUNT,
+	       NVL(A.LIKE_COUNT, 0) AS LIKE_COUNT,
+	       NVL(A.BRAND_CODE, '') AS BRAND_CODE,
+	       NVL(B.USER_NICKNAME, '') AS USER_NICKNAME,
+	       NVL(TO_CHAR(SBOARD_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS SBOARD_REG_DATE
+	  FROM TBL_SBOARD A, TBL_USER B
+	 WHERE A.USER_ID = B.USER_ID
+	   AND A.SBOARD_NO = #{value}
+</select>
+
+<!-- 게시물 조회수 증가 민정-->
+<select id="sboardReadCountPlus" parameterType="int">
+	UPDATE TBL_SBOARD
+	   SET READ_COUNT = READ_COUNT + 1
+	 WHERE SBOARD_NO = #{value}
+
+</select>
+
+<!-- 게시물에 있는 댓글 전체 삭제 민정-->
+<delete id="styleAllReplyDelete" parameterType="int">
+	 DELETE FROM TBL_SBOARD_COMMENT
+	 WHERE SBOARD_NO = #{value}
+</delete>
+
+<!-- 댓글 sboardNo로 조회민정 -->
+<select id="styleAllReplySelect" parameterType="int" resultMap="sboardCommentResultMap">
+SELECT SBOARD_COMMENT_NO,
+       SBOARD_NO,
+       NVL(COMMENT_USER_ID, '') AS COMMENT_USER_ID,
+       NVL(COMMENT_CONTENT, '') AS COMMENT_CONTENT,
+       NVL(TO_CHAR(COMMENT_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS COMMENT_REG_DATE
+  FROM TBL_SBOARD_COMMENT
+ WHERE SBOARD_NO = #{value}
+</select>
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@게시글 삭제시 좋아요도 같이 삭제@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- 게시물 삭제시 좋아요 체크 -->
+<select id="sboardLikeCount" parameterType="int" resultType="int">
+	SELECT COUNT(LIKE_NO)
+	  FROM TBL_SBOARD_LIKE
+	 WHERE SBOARD_NO = #{value}
+</select>
+
+<!-- 좋아요 삭제 -->
+<delete id="sboardLikeDelete" parameterType="int">
+	DELETE FROM TBL_SBOARD_LIKE
+	 WHERE SBOARD_NO = #{value}
+</delete>
+
+<!-- 게시물 삭제 민정-->
+<delete id="sboardDelete" parameterType="int">
+	DELETE FROM TBL_SBOARD
+	 WHERE SBOARD_NO = #{value}
+</delete>
+
+
+
+
+<!-- 게시물 등록(style 글쓰기 페이지 ) 이연 writeForm-->
+<insert id="boardInsert" parameterType="com.icia.web.model.Sboard">
+INSERT INTO TBL_SBOARD (
+    SBOARD_NO,
+    USER_ID,
+    SBOARD_TITLE,
+    SBOARD_CONTENT,
+    READ_COUNT,
+    LIKE_COUNT,
+    BRAND_CODE,
+    SBOARD_REG_DATE
+) VALUES (
+    #{sboardNo},
+    #{userId},
+    #{sboardTitle},
+    #{sboardContent},
+    #{readCount},
+    #{likeCount},
+    #{brandCode},
+    SYSDATE
+    
+    
+)
+</insert>
+
+<!-- 스타일 시퀀스 이연 -->
+<select id="styleSeq" parameterType="com.icia.web.model.Sboard" resultType="int">    
+	SELECT TEST_TBL_SBOARD_SEQ.NEXTVAL FROM DUAL  
+</select>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
+<!-- 댓글 리스트  민정-->
+<select id="styleReplyList" parameterType="int" resultMap="sboardCommentResultMap">
+	SELECT A.SBOARD_COMMENT_NO AS SBOARD_COMMENT_NO,
+	       B.SBOARD_NO AS SBOARD_NO,
+	       NVL(A.COMMENT_USER_ID, '') AS COMMENT_USER_ID,
+	       NVL(A.COMMENT_CONTENT, '') AS COMMENT_CONTENT,
+	       NVL(TO_CHAR(A.COMMENT_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS COMMENT_REG_DATE
+  	FROM TBL_SBOARD_COMMENT A, TBL_SBOARD B
+   WHERE A.SBOARD_NO = B.SBOARD_NO
+     AND A.SBOARD_NO = #{value}
+ ORDER BY COMMENT_REG_DATE ASC
+</select>
+
+<!-- 댓글 등록 민정 -->
+<insert id="styleReplyInsert" parameterType="com.icia.web.model.SboardComment" >
+<!-- 선행처리기(시퀀스 생성) -->
+<selectKey resultType="int" keyProperty="sboardCommentNo" order="BEFORE">
+	SELECT TEST_TBL_COMMENT_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO TBL_SBOARD_COMMENT (
+    SBOARD_COMMENT_NO,
+    SBOARD_NO,
+    COMMENT_USER_ID,
+    COMMENT_CONTENT,
+    COMMENT_REG_DATE
+) VALUES (
+    #{sboardCommentNo},
+    #{sboardNo},
+    #{commentUserId},
+   	#{commentContent},
+    SYSDATE
+)
+</insert>
+
+<!-- 댓글 삭제 민정-->
+<delete id="styleReplyDelete" parameterType="int">
+	 DELETE FROM TBL_SBOARD_COMMENT
+	 WHERE SBOARD_COMMENT_NO = #{value}
+</delete>
+
+<!-- 댓글 조회 민정 -->
+<select id="styleReplySelect" parameterType="int" resultMap="sboardCommentResultMap">
+SELECT SBOARD_COMMENT_NO,
+       SBOARD_NO,
+       NVL(COMMENT_USER_ID, '') AS COMMENT_USER_ID,
+       NVL(COMMENT_CONTENT, '') AS COMMENT_CONTENT,
+       NVL(TO_CHAR(COMMENT_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS COMMENT_REG_DATE
+  FROM TBL_SBOARD_COMMENT
+ WHERE SBOARD_COMMENT_NO = #{value}
+</select>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+<!-- 해당 스타일에 눌러진 모든 좋아요 미지 -->
+<select id="likeSelect" parameterType="com.icia.web.model.SboardLike" resultMap="sboardLikeMap">
+	SELECT *
+	 FROM TBL_SBOARD_LIKE  
+	 WHERE SBOARD_NO = #{sboardNo}
+	  AND USER_ID = #{userId} 
+</select>
+
+<!-- 좋아요 눌렀는지 안눌렀는지 확인용,1이 오면 좋아요 취소를 보여주고 0이면 좋아요를 보여주자-->
+<select id="likeCheck" parameterType="com.icia.web.model.SboardLike" resultType="int" >
+	SELECT COUNT(*) 
+	  FROM TBL_SBOARD_LIKE  
+	 WHERE SBOARD_NO = #{sboardNo} 
+	   AND USER_ID = #{userId}
+</select>
+
+<!-- 좋아요 추가 미지 -->
+<insert id="likeInsert" parameterType="com.icia.web.model.SboardLike">
+<!-- 선행처리기(시퀀스 생성) -->
+<selectKey resultType="int" keyProperty="likeNo" order="BEFORE">
+	SELECT SEQ_SBOARD_LIKE.NEXTVAL FROM DUAL 
+</selectKey>
+INSERT INTO TBL_SBOARD_LIKE (
+    		LIKE_NO,
+    		SBOARD_NO,
+    		USER_ID
+			) VALUES (
+			    #{likeNo},  
+			    #{sboardNo},
+			    #{userId}
+			)
+</insert>
+<!-- 좋아요 +1 미지 -->
+<update id="likeUpUpdate" parameterType="int">
+	UPDATE TBL_SBOARD
+	   SET LIKE_COUNT = LIKE_COUNT +1
+	 WHERE SBOARD_NO = #{value}
+</update>
+
+<!-- 좋아요 취소 미지 -->
+<delete id="likeDelete" parameterType="com.icia.web.model.SboardLike">
+	DELETE FROM TBL_SBOARD_LIKE
+	 WHERE SBOARD_NO = #{sboardNo}
+	   AND USER_ID = #{userId}
+</delete>
+<!-- 좋아요 -1 미지 -->
+<update id="likeDownUpdate" parameterType="int">
+	UPDATE TBL_SBOARD
+	   SET LIKE_COUNT = LIKE_COUNT -1
+	 WHERE SBOARD_NO = #{sboardNo}
+</update>
+
+
+<!-- 총게시물 수  관리자 이연-->
+<select id="boardListCount" parameterType="com.icia.web.model.Sboard" resultType="int">
+	SELECT COUNT(SBOARD_NO) AS CNT
+	  FROM TBL_SBOARD
+	  WHERE  1=1
+	  
+<if test='searchType != null and searchType != "" and searchValue != null and searchValue != ""'>
+	<choose>
+		<when test='searchType == "1"'>
+		  AND USER_ID LIKE '%' ||  #{searchValue} || '%'
+		</when>
+		<when test='searchType == "2"'>
+			AND SBOARD_TITLE LIKE '%' ||  #{searchValue} || '%'
+		</when>
+		<when test='searchType == "3"'>
+			AND DBMS_LOB.INSTR(SBOARD_CONTENT,  #{searchValue}) > 0
+		</when>
+	</choose>
+</if>
+</select>
+
+<!-- 관리자 게시물 리스트  이연-->
+<select id ="boardList" parameterType="com.icia.web.model.Sboard" resultMap="sboardResultMap">
+	 SELECT SBOARD_NO,
+		       USER_ID,
+		       SBOARD_TITLE,
+		       SBOARD_CONTENT,
+		       READ_COUNT,
+		       LIKE_COUNT,  
+		       BRAND_CODE,
+		       SBOARD_REG_DATE
+		    FROM(SELECT ROWNUM AS RNUM,
+		              SBOARD_NO,
+		              USER_ID,
+		              SBOARD_TITLE,
+		              SBOARD_CONTENT,
+		              READ_COUNT,
+		              LIKE_COUNT,
+		              BRAND_CODE,
+		              SBOARD_REG_DATE
+		          FROM (SELECT SBOARD_NO,
+		                       NVL(USER_ID, '') AS USER_ID,
+		                       NVL(SBOARD_TITLE, '') AS SBOARD_TITLE,
+		                       NVL(SBOARD_CONTENT, '') AS SBOARD_CONTENT,
+		                       NVL(READ_COUNT, 0) AS READ_COUNT,
+		                       NVL(LIKE_COUNT, 0) AS LIKE_COUNT,
+		                       NVL(BRAND_CODE, '') AS BRAND_CODE,
+		                       NVL(TO_CHAR(SBOARD_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS SBOARD_REG_DATE
+		                  FROM TBL_SBOARD
+		                  WHERE 1=1
+<if test='searchType != null and searchType != "" and searchValue != null and searchValue != ""'>
+	<choose>
+		<when test='searchType == "1"'>
+			  AND USER_ID LIKE '%' || #{searchValue} || '%'
+		</when>
+		<when test='searchType == "2"'>
+			 AND SBOARD_TITLE LIKE '%' || #{searchValue} || '%'
+		</when>
+		<when test='searchType == "3"'>
+			 AND DBMS_LOB.INSTR(SBOARD_CONTENT, #{searchValue}) > 0
+		</when>
+	</choose>	  
+</if>                       
+	             ORDER BY SBOARD_NO DESC))
+	 WHERE RNUM <![CDATA[>=]]> #{startRow}
+	   AND RNUM <![CDATA[<=]]> #{endRow}
+
+</select>
+
+<!-- 용구 -->
+<select id="sboardBest" parameterType="com.icia.web.model.Sboard" resultType="long">
+   SELECT SBOARD_NO
+       FROM(SELECT ROWNUM AS RNUM, SBOARD_NO
+           FROM (SELECT SBOARD_NO
+              FROM
+                  TBL_SBOARD
+               ORDER BY LIKE_COUNT DESC))
+        WHERE RNUM <![CDATA[<=]]> 10   <!-- 좋야요 많은순으로 스타일 게시판 번호 정렬 -->
+
+</select>
+
+
+
+<!-- 스타일게시글에서 상품정보 저장하기 위한 쿼리 : 양진구 -->
+<insert id="sboardProductInfoNoInsert" parameterType="com.icia.web.model.SboardProductInfoNo">
+	INSERT INTO TBL_SBOARD_PRODUCT_INFO (
+	    SBOARD_NO,
+	    PRODUCT_NO
+	) VALUES (
+	    #{sboardNo},
+	    #{productNo}
+)
+</insert>
+
+<!-- 스타일상세에서 상품 정보 불러오기 -->
+<select id = "sboardProductSelect" parameterType="int" resultMap="sboardProductInfoNoMap">
+SELECT SBOARD_NO,
+       PRODUCT_NO
+  FROM(
+SELECT B.PRODUCT_NO AS PRODUCT_NO,
+       A.SBOARD_NO AS SBOARD_NO
+ FROM TBL_SBOARD_PRODUCT_INFO A, TBL_PRODUCT B
+ WHERE B.PRODUCT_NO = A.PRODUCT_NO
+   AND A.SBOARD_NO = ${value}) 
+</select>
+
+<!-- 스타일상세에서 상품 정보 삭제 민정-->
+<delete id="sboardProductDelete" parameterType="int">
+DELETE FROM TBL_SBOARD_PRODUCT_INFO
+      WHERE SBOARD_NO = #{value}
+</delete>
+
+
+</mapper>

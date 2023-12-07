@@ -1,0 +1,152 @@
+main{
+    width: 100%;
+    min-height: 100vh;
+}
+
+.mystyle{
+    width: 60%;
+    margin: auto;
+    padding: 1%;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    margin-top: 2vw;
+    margin-bottom: 4vw;
+}
+
+.mystyle h1{
+    text-align: center;
+}
+
+.mystyle_div{
+    margin: 0;
+}
+
+.style_tbl{
+    border: 1px black solid;
+    width: 100%;
+    text-align: center;
+}
+.style_thead{
+font-weight: bold;
+}
+
+.mystyle_img{
+    width: 150px;
+    height: 210px;  
+    border-radius: 25px;
+}
+
+.like_btn{
+    background-color: white;
+    border: 0;
+    font-weight: bold;
+    font-size: 0.7vw;
+}
+
+.like_btn:hover{
+    font-size: 0.8vw;
+}
+.style_tbl td{
+    width: 20%;
+    margin: auto;
+    word-break:break-all
+}
+
+
+
+.list{
+    width: 16vw;
+    height: 28vw;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2%;
+    border: 1px black solid;
+}
+
+.list a{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+.list button{
+    background-color: white;
+    font-weight: bold;
+    border: none;
+    font-size: large;
+}
+
+.list button:hover{
+    font-size: larger
+}
+
+
+.list_img{
+    width: 14vw;
+    height: 20vw;
+    margin: 1vw;
+    border-radius: 50px;
+    border: 1px solid black;
+}
+
+.list_img img{
+	width: 14vw;
+    height: 20vw;
+    border-radius: 50px;
+}
+
+.list p{
+    margin: 0.3vw;
+    margin-bottom: 1vw;
+}
+
+
+.style_div{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.paginations {
+  list-style: none;
+  height: 5vh;
+  margin: auto;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.page-item{
+  float: left;
+  text-align: center;
+}
+
+.page-item a{
+  color: black;
+  padding: 1vw;
+  border: 0; 
+}
+
+.curPage {
+color: #fff;
+font-weight:bold;
+}
+
+.page-item.active a{
+ z-index: 1;
+ font-weight:bold;
+ background-color: rgb(255, 255, 255);
+ 
+}
+
+.page-item a:focus, .page-item a:hover{
+  font-weight: bold;
+  color:black;
+}
+.paginations .pg_num .now-item a{
+	font-weight: bold;
+}

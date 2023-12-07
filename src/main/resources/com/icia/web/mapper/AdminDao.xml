@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.web.dao.AdminDao">
+
+<resultMap id="adminResultMap" type="com.icia.web.model.Admin">
+	<result column="ADMIN_ID" property="adminId" />
+	<result column="ADMIN_PWD" property="adminPwd" />
+	<result column="ADMIN_NAME" property="adminName" />
+	<result column="ADMIN_STATUS" property="adminStatus" />
+	<result column="ADMIN_REG_DATE" property="adminRegDate" />
+</resultMap>
+
+<select id="adminSelect" parameterType="String" resultMap="adminResultMap">
+SELECT ADMIN_ID,
+       NVL(ADMIN_PWD, '') AS ADMIN_PWD,
+       NVL(ADMIN_NAME, '') AS ADMIN_NAME,
+       NVL(ADMIN_STATUS, '') AS ADMIN_STATUS,
+       NVL(TO_CHAR(ADMIN_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS ADMIN_REG_DATE
+FROM TBL_ADMIN
+WHERE ADMIN_ID = #{value}
+</select>
+
+<select id="productSeq" parameterType="com.icia.web.model.Product" resultType="int">
+	SELECT TEST_TBL_PRODUCT_SEQ.NEXTVAL FROM DUAL  
+</select>
+
+<insert id="productInsert" parameterType="com.icia.web.model.Product">
+INSERT INTO TBL_PRODUCT (
+    PRODUCT_NO,
+    MAIN_CATEGORY_CODE,
+    SUB_CATEGORY_CODE,
+    PRODUCT_NAME,
+    PRODUCT_PRICE,
+    PRODUCT_REG_DATE,
+    SALES_RATE,
+    BRAND_CODE
+) VALUES (
+    #{productNo},
+    #{mainCategoryCode},
+    #{subCategoryCode},
+    #{productName},
+    #{productPrice},
+    SYSDATE,
+    0,
+    #{brandCode}
+)
+</insert>
+
+<insert id="sizeInStockInsert" parameterType="com.icia.web.model.ProductSize">
+INSERT INTO TBL_PRODUCT_SIZE (
+    PRODUCT_NO,
+    SIZE_NAME,
+    UNITS
+) VALUES (
+    #{productNo},
+    #{sizeName},
+    #{units}
+)
+</insert>
+
+
+</mapper>

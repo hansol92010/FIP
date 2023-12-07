@@ -1,0 +1,287 @@
+
+/*결제 페이지 문구의 css입니다.*/
+.payment-page {
+left: 50%;
+text-align: center;
+border: 0px solid #ccc;
+padding: 20px;
+box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+/*여기까지 결제 페이지 문구의 css입니다.*/
+
+
+/*결제 페이지의 박스를 정의해둔 css 코드입니다.*/
+.container-buyForm {
+display: flex;
+flex-direction: row;
+margin: 90px auto;
+width: 80%;
+background-color: #fff;
+padding: 20px;
+box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+.left-box {
+flex: 1;
+display: flex;
+flex-direction: column;
+padding: 20px;
+background-color: #fff;
+box-shadow: 0px 0px 5px rgba(0, 0, 0, 0);
+margin-right: 20px;
+}
+
+.left-box .item {
+flex: 1;
+padding: 20px;
+margin-bottom: 20px;
+box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.right-box {
+flex: 2;
+display: flex;
+flex-direction: column;
+padding: 20px;
+background-color: #fff;
+box-shadow: 0px 0px 5px rgba(0, 0, 0, 0);
+}
+
+.right-box .item {
+flex: 1;
+
+box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+/*여기까지가 결제 페이지의 박스를 정의해둔 css코드입니다.*/
+
+/*주문한 상품 박스에 들어가는 css 코드입니다.*/
+.order-product {
+  padding: 20px;
+border: 0px solid #ccc;
+background-color: #fcfcfc;
+}
+
+.order-product h2 {
+font-size: 24px;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.product-info {
+display: flex;
+align-items: center;
+}
+
+.product-info img {
+width: 100px;
+height: 100px;
+margin-right: 20px;
+}
+
+.product-details {
+display: flex;
+flex-direction: column;
+}
+
+.product-details p {
+margin: 0;
+font-size: 16px;
+}
+
+.product-name {
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+.product-size {
+margin-bottom: 5px;
+}
+
+.product-price {
+font-weight: bold;
+}
+/*여기까지가 주문한 상품의 대한 css 코드 입니다. */
+
+/*주문자의 정보를 담아둔 박스의 css코드입니다.*/
+.customer-info {
+padding: 20px;
+}
+.shipping-info{
+margin: 20px;
+}
+
+.customer-info h2 {
+font-size: 24px;
+margin-bottom: 10px;
+}
+
+.customer-info label {
+display: block;
+font-size: 16px;
+margin-bottom: 5px;
+}
+
+.customer-info input {
+padding: 10px;
+margin-bottom: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+font-size: 16px;
+}
+
+.customer-info input:focus {
+outline: none;
+border: 0px solid #008CBA;
+}
+
+.customer-info input[type="submit"] {
+background-color: #008CBA;
+color: #fff;
+border: none;
+padding: 10px 20px;
+margin-top: 10px;
+border-radius: 5px;
+font-size: 16px;
+cursor: pointer;
+}
+
+.customer-info input[type="submit"]:hover {
+background-color: #005f78;
+}
+/*여기까지가 주문자의 정보를 담아둔 박스의 css 코드입니다.*/
+
+/*배송 정보를 담아둔 박스의 css코드입니다.*/
+.shipping-info__title {
+font-size: 1.5rem;
+font-weight: bold;
+margin-bottom: 1rem;
+}
+
+.shipping-info__form {
+display: flex;
+flex-direction: column;
+gap: 1rem;
+}
+
+.shipping-info__label {
+font-size: 1.1rem;
+font-weight: bold;
+margin-bottom: 0.5rem;
+}
+
+.shipping-info__input,
+.shipping-info__select {
+padding: 0.5rem;
+font-size: 1rem;
+border-radius: 5px;
+border: 1px solid #ccc;
+}
+
+.shipping-info__button {
+background-color: #4caf50;
+color: #fff;
+border: none;
+border-radius: 5px;
+padding: 0.5rem 1rem;
+font-size: 1.1rem;
+cursor: pointer;
+}
+
+.shipping-info__button:hover {
+background-color: #3e8e41;
+}
+/*여기까지가 배송 정보를 담아둔 css 코드입니다.*/
+
+/*쿠폰 박스*/
+.payment-page__coupon {
+margin-top: 0px;
+padding: 20px;
+background-color: #f5f5f5;
+border-radius: 5px;
+}
+  
+.payment-page__coupon-title {
+margin-bottom: 10px;
+}
+
+.payment-page__coupon-input {
+display: flex;
+align-items: center;
+}
+
+.payment-page__coupon-input input[type="text"] {
+width: 70%;
+padding: 8px;
+border: none;
+border-radius: 5px;
+margin-right: 10px;
+}
+
+.payment-page__coupon-input button {
+padding: 8px 15px;
+background-color: #1565c0;
+color: #fff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.payment-page__coupon-input button:hover {
+background-color: #0d47a1;
+}
+/*쿠폰 종료*/
+
+/*최종결제 페이지*/
+.checkbox-container {
+display: inline-block;
+vertical-align: middle;
+cursor: pointer;
+margin-left: 10px;
+}
+
+.checkbox-container input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+}
+
+.checkbox-container span {
+position: relative;
+padding-left: 25px;
+user-select: none;
+}
+
+.checkbox-container span::before {
+content: "";
+position: absolute;
+left: 0;
+top: 50%;
+transform: translateY(-50%);
+width: 18px;
+height: 18px;
+border: 2px solid #333;
+box-sizing: border-box;
+}
+
+.checkbox-container input:checked + span::before {
+border-color: #1a73e8;
+background-color: #1a73e8;
+}
+
+.checkbox-container span::after {
+content: "";
+position: absolute;
+left: 5px;
+top: 50%;
+transform: translateY(-50%);
+width: 6px;
+height: 10px;
+border: solid #fff;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+display: none;
+}
+
+.checkbox-container input:checked + span::after {
+display: block;
+}

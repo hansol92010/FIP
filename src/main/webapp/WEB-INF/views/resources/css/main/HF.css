@@ -1,0 +1,117 @@
+Header ul, footer ul {
+  display: block;
+  
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+  list-style-type: none;
+}
+Header li, footer li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+Header a, footer a{
+  text-decoration-line: none;
+  color: black;
+}
+
+body{
+  margin: 0;
+}
+
+/* fip 이미지 로고 설정 */
+.logo{
+	margin: 0;
+	padding: 0;
+}
+
+.logo img{
+	width: 4vw;
+	height: 7vh;
+	margin: 0;
+}
+
+/* 로고설정 끝 */
+
+Header{
+  display: flex;
+  position: sticky;
+  top: 0px;
+  right: 0px;
+  padding: 39px;
+  z-index: 9999;
+  background-color: #000000da;
+}
+.top_list{
+  display: flex;
+  position: absolute;
+  top: 0px; right: 0;
+  padding-right: 20px;
+}
+.top_link{
+font-size: 12px;
+color: rgb(255, 255, 255);
+margin-left: 20px;
+}
+.top_header_ul{
+display: flex;
+top: 20px;
+right: 0;
+padding: 0px 40px 0;
+height: 22px;
+margin-bottom: 4vh;
+margin-top: 0;
+}
+.logo{
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+}
+.www{
+  display: flex;
+  position: absolute;
+  top: 20px; right: 0;
+  padding: 18px 40px 0;
+  height: 22px;
+}
+.menu{
+  display: flex;
+  padding-left: 60px;
+  color: rgb(255, 255, 255);
+}
+
+.top_link:hover,.logo:hover,.menu:hover{
+  color: rgb(193, 160, 255);
+}
+
+footer{
+  background-color: whitesmoke;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  flex-direction: row-reverse;
+  -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding-bottom: 56px;
+    border-bottom: 1px solid #ebebeb;
+}
+.below_detail{
+  display: -webkit-box;
+  display: flex;
+}
+
+.below{
+  font-size: 16px;
+  letter-spacing: -.16px;
+  margin: 0px 40px 0px 20px;
+}
+.below_link{
+    font-size: 14px;
+    letter-spacing: -.21px;
+    color: rgba(34,34,34,.5);
+    
+}
+
+
